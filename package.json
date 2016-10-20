@@ -1,0 +1,19 @@
+{
+  "name": "change-case",
+  "version": "1.0.0",
+  "description": "Changes case ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EngineeredTruth/change-case.git"
+  },
+  "author": "Matt Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EngineeredTruth/change-case/issues"
+  },
+  "homepage": "https://github.com/EngineeredTruth/change-case#readme"
+}
