@@ -7,8 +7,7 @@ import passport from 'passport';
 import massive from 'massive';
 import path from 'path';
 
-var Auth0Strategy = require('passport-auth0'),
-    passport = require('passport');
+var Auth0Strategy = require('passport-auth0')
 
 const connectionString = 'postgres://Tran@localhost/changecase';
 const massiveInstance = massive.connectSync({
@@ -33,18 +32,20 @@ app.use(express.static(__dirname + '/../public'));
 //     response.sendFile(path.resolve(__dirname, '../public', 'index.html'))
 // });
 const db = app.get('db');
+const ctrl = require('./ctrl.js');
 
 //Auth0
 var strategy = new Auth0Strategy({
    domain:       'tran.auth0.com',
    clientID:     config.auth0ClientId,
-   clientSecret: 'your-client-secret',
+   clientSecret: config.auth0Secret,
    callbackURL:  'http://localhost:3000/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
+    console.log("accessToken: ", accessToken);
+    console.log('refreshToken: ', refreshToken);
+    console.log('extraParams: ', extraParams);
+    console.log('profile: ', profile)
     return done(null, profile);
   }
 );
@@ -56,8 +57,23 @@ app.get('/', function(req,res){
   res.status(200).json(messages);
 });
 
+app.get('/auth/', passport.authenticate('auth0'));
+app.get('/callback', passport.authenticate('auth0', {
+    failureRedirect: '/auth'
+}), ctrl.respond);
+
+
 app.get('/login', (req, res, next) => {
     res.json({"test":"is working"});
+});
+
+passport.serializeUser((user, done) => {
+    done(null, user); // put the whole user object from YouTube on the sesssion;
+});
+
+passport.deserializeUser((obj, done) => {
+    //Only do something here that needs to be done with every request
+    done(null, obj); // get data from session and put it on req.user in every endpoint;
 });
 
 app.listen(config.port, () => {
