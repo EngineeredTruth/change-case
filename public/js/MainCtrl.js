@@ -1,4 +1,6 @@
-angular.module('app').controller('MainCtrl', function($scope, srvc){
+angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj){
+
+  console.log('promiseObj: ', promiseObj)
   $scope.name = srvc.test;
   $scope.string = 'this is a test';
 

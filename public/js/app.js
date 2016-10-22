@@ -4,7 +4,12 @@ angular.module('app',['ui.router'])
       .state('home', {
         url: '/:error',
         templateUrl: './views/home.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          promiseObj: function(factory){
+            return factory.getUserData();
+          }
+        }
       })
 
     $urlRouterProvider.otherwise('/');

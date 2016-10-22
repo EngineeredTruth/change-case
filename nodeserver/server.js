@@ -42,10 +42,10 @@ var strategy = new Auth0Strategy({
    callbackURL:  'http://localhost:3000/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-    console.log("accessToken: ", accessToken);
-    console.log('refreshToken: ', refreshToken);
-    console.log('extraParams: ', extraParams);
-    console.log('profile: ', profile)
+    // console.log("accessToken: ", accessToken);
+    // console.log('refreshToken: ', refreshToken);
+    // console.log('extraParams: ', extraParams);
+    // console.log('profile: ', profile)
     return done(null, profile);
   }
 );
@@ -59,8 +59,15 @@ app.get('/', function(req,res){
 
 app.get('/auth/', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
-    failureRedirect: '/auth'
+    failureRedirect: '/auth',
+    successRedirect: '/'
 }), ctrl.respond);
+
+app.get('/getUserData', (req, res, next) => {
+  console.log('REQ.BODY: ', req.body)
+  console.log('REQ.USER: ', req.user)
+  res.json(req.user);
+})
 
 
 app.get('/login', (req, res, next) => {

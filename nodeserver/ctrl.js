@@ -5,6 +5,6 @@ module.exports = {
     respond: (req, res, next) => {
         console.log('req.body:', req.body)
         console.log('req.user:', req.user)
-      return res.json({"hello":"user"})
+      return res.json({"test":"is working"})
     }
   }
