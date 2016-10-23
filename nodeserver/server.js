@@ -42,10 +42,26 @@ var strategy = new Auth0Strategy({
    callbackURL:  'http://localhost:3000/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-    // console.log("accessToken: ", accessToken);
-    // console.log('refreshToken: ', refreshToken);
-    // console.log('extraParams: ', extraParams);
-    // console.log('profile: ', profile)
+    console.log("accessToken: ", accessToken);
+    console.log('refreshToken: ', refreshToken);
+    console.log('extraParams: ', extraParams);
+    console.log('profile: ', profile.id)
+
+    db.read_user_externalId([profile.id], (err,response) => {
+      if(err){
+        console.log('ERROR at READ EXTERNALID: ', profile.id)
+      }
+      if(response){
+        console.log('RESPONSE FROM READ: ', response)
+      }
+      if(response.length === 0){
+        db.create_user([profile.id,profile.displayName], (err,response)=>{
+
+        })
+      }
+
+    });
+
     return done(null, profile);
   }
 );
