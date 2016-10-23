@@ -12,6 +12,15 @@ angular.module('app')
                     }).then(function(response){
                         return response.data;
                     })
+                  },
+                  addWord: function(word){
+                    return $http({
+                      method: 'POST',
+                      url: '/addWord',
+                      data: {"noun":word}
+                    }).then(function(response){
+                      return response.data;
+                    })
                   }
                 }
               }

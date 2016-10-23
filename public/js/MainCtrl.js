@@ -1,6 +1,8 @@
-angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj){
+angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, factory){
 
   console.log('promiseObj: ', promiseObj)
+  $scope.user = promiseObj
+
   $scope.name = srvc.test;
   $scope.string = 'this is a test';
 
@@ -36,7 +38,7 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj){
 
   $scope.camelCase = function(){
     let results = $scope.string.split('')
-
+    results[0] = results[0].toLowerCase();
     console.log(results)
 
     for(let i = 1; i < results.length; i++){
@@ -54,6 +56,15 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj){
 
   $scope.removeSpaces = function(){
     $scope.string = $scope.string.replace(/\s/g,'');
+  }
+
+  $scope.noun = ''
+
+  $scope.addWord = function(word){
+    console.log('Ctrl: Adding word')
+    factory.addWord(word).then(function(response){
+      console.log(response)
+    })
   }
 
 })

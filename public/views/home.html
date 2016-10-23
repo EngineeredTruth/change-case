@@ -1,5 +1,8 @@
 <div>
   <h1>Change Case</h1>
+
+  <h1 ng-if="user">Welcome back {{user.displayName}}</h1>
+
   <a href='/auth'><button type='button'>Login</button></a>
   <form ng-submit=log()>
       <input ng-model=string />
@@ -8,6 +11,11 @@
       <button type='submit' ng-click='capitalCase()'>Capital case</button>
       <button type='submit' ng-click='camelCase()'>Camel case</button>
       <button type='submit' ng-click='removeSpaces()'>Remove Spaces</button>
+  </form>
+
+  <form ng-if="user" ng-submit='addWord(noun)'>
+    <input ng-model=noun />
+    <button type='submit'>Add Noun</button>
   </form>
 
   <p>

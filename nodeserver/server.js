@@ -74,6 +74,8 @@ app.get('/login', (req, res, next) => {
     res.json({"test":"is working"});
 });
 
+app.post('/addWord', ctrl.addWord)
+
 passport.serializeUser((user, done) => {
     done(null, user); // put the whole user object from YouTube on the sesssion;
 });
