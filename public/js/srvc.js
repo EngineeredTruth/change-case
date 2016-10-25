@@ -13,11 +13,11 @@ angular.module('app')
                         return response.data;
                     })
                   },
-                  addWord: function(word){
+                  addWord: function(word, userId){
                     return $http({
                       method: 'POST',
                       url: '/addWord',
-                      data: {"noun":word}
+                      data: {"word":word, "userId":userId}
                     }).then(function(response){
                       return response.data;
                     })

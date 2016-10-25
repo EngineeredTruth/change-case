@@ -10,5 +10,5 @@ CREATE TABLE USERS
 CREATE TABLE SAVEDWORDS
 (
   word text,
-  u_id integer references users(id)
+  externalId character varying(50)
 );
