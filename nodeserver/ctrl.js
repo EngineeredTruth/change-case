@@ -7,17 +7,18 @@ module.exports = {
     },
     addWord: (req, res, next) => {
 
-      db.read_word([req.body.word, req.body.userId], function(err, response){
+      db.read_word([req.body.word, req.body.userId], function(err, res1){
         if(err){
           console.log('read_word error: ', err)
         }
-        if(response.length === 0){
+        console.log('READ WORD: ', res1)
+        if(res1.length === 0){
 
-          db.add_word([req.body.word, req.body.userId], function(err, response){
+          db.add_word([req.body.word, req.body.userId], function(err, res2){
             if(err){
               console.log('add_word error: ', err)
             }
-              console.log('ADDED WORD: ', response)
+              console.log('ADDED WORD: ', res2)
             });
 
               return res.json({"Word":"has been added, sir"})

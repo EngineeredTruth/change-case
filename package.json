@@ -34,5 +34,6 @@
     "presets": [
       "babel-preset-es2015"
     ]
-  }
+  },
+  "devDependencies": {}
 }
