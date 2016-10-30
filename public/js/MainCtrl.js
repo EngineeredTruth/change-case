@@ -60,10 +60,13 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
 
   $scope.noun = ''
 
+  $scope.status = '';
+
   $scope.addWord = function(word){
     console.log('Ctrl: Adding word to ', $scope.user.id)
     factory.addWord(word, $scope.user.id).then(function(response){
-      console.log(response)
+      console.log('Response from Addword: ', response)
+      $scope.status = response.status;
     })
   }
 

@@ -21,9 +21,9 @@ module.exports = {
               console.log('ADDED WORD: ', res2)
             });
 
-              return res.json({"Word":"has been added, sir"})
+              return res.json({"status":req.body.word+" has been added to the database"})
             } else {
-              return res.json({"Word":"Is already in database"})
+              return res.json({"status":res1[0].word+" is already in the database"})
             }
       })
   }
