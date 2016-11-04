@@ -7,8 +7,8 @@ module.exports = {
     },
     addWord: (req, res, next) => {
 
-
-      db.read_word([req.body.word, req.body.userId], function(err, res1){
+      console.log('\\A'+req.body.word+'\\Z');
+      db.read_word(['\\A'+req.body.word+'\\Z', req.body.userId], function(err, res1){
         if(err){
           console.log('read_word error: ', err)
         }
@@ -22,9 +22,14 @@ module.exports = {
               console.log('ADDED WORD: ', res2)
             });
 
-              return res.json({"status":req.body.word+" has been added to the database"})
+            db.read_all([req.body.userId], function(err,all){
+              return res.json({"status":req.body.word+" has been added to the database", "list":all})
+            })
+
             } else {
-              return res.json({"status":res1[0].word+" is already in the database"})
+              db.read_all([req.body.userId], function(err,all){
+                return res.json({"status":res1[0].word+" is already in the database", "list":all})
+              })
             }
       })
   }

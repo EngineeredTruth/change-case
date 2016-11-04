@@ -1,13 +1,22 @@
 angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, factory){
 
   console.log('promiseObj: ', promiseObj)
-  $scope.user = promiseObj
+  $scope.user = promiseObj.user
   let store = '';
+
+  $scope.list = promiseObj.list
+
 
   $scope.name = srvc.test;
   $scope.string = 'Enter a sentence that you want to change case';
 
   $scope.log = function(){console.log($scope.string)}
+
+  $scope.clearInput = function(){
+    if($scope.string === 'Enter a sentence that you want to change case'){
+      $scope.string = '';
+    }
+  }
 
   $scope.lowerCase = function(){
     $scope.string = $scope.string.toLowerCase();
@@ -76,7 +85,16 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
     console.log('Ctrl: Adding word to ', $scope.user.id)
     factory.addWord(word, $scope.user.id).then(function(response){
       console.log('Response from Addword: ', response)
+      $scope.list = response.list
+      console.log('Users list of words: ',$scope.list)
       $scope.status = response.status;
+    })
+  }
+
+  $scope.removeWord = (word)=>{
+    console.log('Removing: ', word)
+    factory.removeWord(word, $scope.user.id).then((response)=>{
+      
     })
   }
 

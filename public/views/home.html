@@ -12,7 +12,7 @@
 
     <div style='margin-bottom: 20px;' class='text-center' class='btn-group form-group' role='group' aria-label='...'>
         <form ng-submit=log()>
-            <input class='string' ng-model=string />
+            <input ng-keydown='clearInput()' ng-click='clearInput()' autofocus class='string' ng-model=string />
             <br/>
             <button class="btn btn-default" type='submit' ng-click='lowerCase()'>Lowercase</button>
             <button class="btn btn-default" type='submit' ng-click='upperCase()'>Uppercase</button>
@@ -34,14 +34,20 @@
             <button class="btn btn-info" type='submit'>Add Noun</button>
         </form>
     </div>
-        <h4 style='margin-top: 40px;' class='text-center'>
+    <h4 ng-if='user' style='margin: 35px 0;' class='text-center'>
             Status: {{status}}
         </h4>
-
 
     <div ng-if='' class="alert alert-dismissible alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
     </div>
 
+    <div class='text-center' ng-if='user'>
+        <h2>Word Bank</h2>
+        <em style='color:darkgrey; margin-bottom: 40px;'>Click on word to remove</em>
+        <ul style='margin: 20px 45px 0 0; list-style: none;'>
+            <li ng-click="removeWord(word.word)" class='wordlist' ng-repeat='word in list'>{{word.word}}</li>
+        </ul>
+    </div>
 </div>

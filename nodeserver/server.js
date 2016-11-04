@@ -36,41 +36,41 @@ const ctrl = require('./ctrl.js');
 
 //Auth0
 var strategy = new Auth0Strategy({
-   domain:       'tran.auth0.com',
-   clientID:     config.auth0ClientId,
-   clientSecret: config.auth0Secret,
-   callbackURL:  'http://localhost:3000/callback'
-  },
-  function(accessToken, refreshToken, extraParams, profile, done) {
-    console.log("accessToken: ", accessToken);
-    console.log('refreshToken: ', refreshToken);
-    console.log('extraParams: ', extraParams);
-    console.log('profile: ', profile.id)
+        domain: 'tran.auth0.com',
+        clientID: config.auth0ClientId,
+        clientSecret: config.auth0Secret,
+        callbackURL: 'http://localhost:3000/callback'
+    },
+    function(accessToken, refreshToken, extraParams, profile, done) {
+        console.log("accessToken: ", accessToken);
+        console.log('refreshToken: ', refreshToken);
+        console.log('extraParams: ', extraParams);
+        console.log('profile: ', profile.id)
 
-    db.read_user_externalId([profile.id], (err,response) => {
-      if(err){
-        console.log('ERROR at READ EXTERNALID: ', profile.id)
-      }
-      if(response){
-        console.log('RESPONSE FROM READ: ', response)
-      }
-      if(response.length === 0){
-        db.create_user([profile.id,profile.displayName], (err,response)=>{
+        db.read_user_externalId([profile.id], (err, response) => {
+            if (err) {
+                console.log('ERROR at READ EXTERNALID: ', profile.id)
+            }
+            if (response) {
+                console.log('RESPONSE FROM READ: ', response)
+            }
+            if (response.length === 0) {
+                db.create_user([profile.id, profile.displayName], (err, response) => {
 
-        })
-      }
+                })
+            }
 
-    });
+        });
 
-    return done(null, profile);
-  }
+        return done(null, profile);
+    }
 );
 
 passport.use(strategy);
 
-app.get('/', function(req,res){
+app.get('/', function(req, res) {
 
-  res.status(200).json(messages);
+    res.status(200).json(messages);
 });
 
 app.get('/auth/', passport.authenticate('auth0'));
@@ -80,14 +80,26 @@ app.get('/callback', passport.authenticate('auth0', {
 }), ctrl.respond);
 
 app.get('/getUserData', (req, res, next) => {
-  console.log('REQ.BODY: ', req.body)
-  console.log('REQ.USER: ', req.user)
-  res.json(req.user);
+    if (req.user) {
+        db.read_all([req.user.id], function(err, all) {
+            if (err) {
+                console.log('Error at getUserData read_all: ', err)
+            }
+            return res.json({
+                "user": req.user,
+                "list": all
+            })
+        })
+    } else {
+      return res.json({"No":"user"});
+    }
 })
 
 
 app.get('/login', (req, res, next) => {
-    res.json({"test":"is working"});
+    res.json({
+        "test": "is working"
+    });
 });
 
 app.post('/addWord', ctrl.addWord)

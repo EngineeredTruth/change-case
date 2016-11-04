@@ -34,3 +34,12 @@
   padding: 12px;
   font: 35px;
 }
+
+.wordlist {
+  font-size: 23px;
+}
+
+.wordlist:hover{
+  cursor: pointer;
+  color: #FF7777;
+}
