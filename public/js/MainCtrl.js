@@ -2,6 +2,7 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
 
   console.log('promiseObj: ', promiseObj)
   $scope.user = promiseObj
+  let store = '';
 
   $scope.name = srvc.test;
   $scope.string = 'Enter a sentence that you want to change case';
@@ -54,8 +55,17 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
     $scope.string = results.join('');
   };
 
+  $scope.undoBtn = 'Remove Spaces'
+
   $scope.removeSpaces = function(){
-    $scope.string = $scope.string.replace(/\s/g,'');
+    if($scope.undoBtn === 'Remove Spaces'){
+      store = $scope.string
+      $scope.string = $scope.string.replace(/\s/g,'');
+      $scope.undoBtn = 'Undo'
+    } else if($scope.undoBtn === 'Undo'){
+      $scope.undoBtn = 'Remove Spaces'
+      $scope.string = store;
+    }
   }
 
   $scope.noun = ''
