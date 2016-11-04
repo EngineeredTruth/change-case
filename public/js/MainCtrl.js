@@ -4,7 +4,7 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
   $scope.user = promiseObj
 
   $scope.name = srvc.test;
-  $scope.string = 'this is a test';
+  $scope.string = 'Enter a sentence that you want to change case';
 
   $scope.log = function(){console.log($scope.string)}
 

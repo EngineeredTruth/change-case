@@ -1,28 +1,38 @@
 <div>
-  <h1>Change Case</h1>
+  <ul class="nav nav-tabs">
+    <li style='float:right;' role="presentation"><a href='/auth'>Login</a></li>
+    <li style='margin:10px 10px; float:right;' role="presentation">Login to save capitalization of special words such as nouns</li>
+  </ul>
 
-  <h1 ng-if="user">Welcome back {{user.displayName}}</h1>
+  <h1 class='text-center'>Change Case</h1>
 
-  <a href='/auth'><button type='button'>Login</button></a>
+  <h1 class='text-center' ng-if="user">Welcome back {{user.displayName}}</h1>
+
+  <div style='margin-bottom: 20px;' class='text-center' class='btn-group form-group' role='group' aria-label='...'>
   <form ng-submit=log()>
-      <input ng-model=string />
-      <button type='submit' ng-click='lowerCase()'>Lowercase</button>
-      <button type='submit' ng-click='upperCase()'>Uppercase</button>
-      <button type='submit' ng-click='capitalCase()'>Capital case</button>
-      <button type='submit' ng-click='camelCase()'>Camel case</button>
-      <button type='submit' ng-click='removeSpaces()'>Remove Spaces</button>
+      <input class='string' ng-model=string />
+      <br/>
+      <button class="btn btn-default" type='submit' ng-click='lowerCase()'>Lowercase</button>
+      <button class="btn btn-default" type='submit' ng-click='upperCase()'>Uppercase</button>
+      <button class="btn btn-default" type='submit' ng-click='capitalCase()'>Capital case</button>
+      <button class="btn btn-default" type='submit' ng-click='camelCase()'>Camel case</button>
+      <button class="btn btn-default" type='submit' ng-click='removeSpaces()'>Remove Spaces</button>
   </form>
+    </div>
 
-  <form ng-if="user" ng-submit='addWord(noun)'>
+  <form class='text-center' ng-if="user" ng-submit='addWord(noun)'>
     <input ng-model=noun />
-    <button type='submit'>Add Noun</button>
+    <button class="btn btn-info" type='submit'>Add Noun</button>
   </form>
 
-  <p>
-    Result: {{string}}
-  </p>
-  <p>
+<div style='margin-top:45px;' class='text-center'>
+  <h3 class='text-center results'>
+    {{string}}
+  </h3>
+  <h4 ng-if="user" style='margin-top: 40px;' class='text-center'>
     Status: {{status}}
-  </p>
+  </h4>
+
+</div>
 
 </div>
