@@ -94,7 +94,8 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
   $scope.removeWord = (word)=>{
     console.log('Removing: ', word)
     factory.removeWord(word, $scope.user.id).then((response)=>{
-      
+      console.log('Response from remove word: ', response)
+      $scope.list = response.list
     })
   }
 

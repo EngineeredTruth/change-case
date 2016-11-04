@@ -103,6 +103,7 @@ app.get('/login', (req, res, next) => {
 });
 
 app.post('/addWord', ctrl.addWord)
+app.post('/removeWord', ctrl.removeWord)
 
 passport.serializeUser((user, done) => {
     done(null, user); // put the whole user object from YouTube on the sesssion;

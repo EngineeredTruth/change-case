@@ -21,6 +21,15 @@ angular.module('app')
                     }).then(function(response){
                       return response.data;
                     })
+                  },
+                  removeWord: function(word, userId){
+                    return $http({
+                      method: 'POST',
+                      url: '/removeWord',
+                      data:{"word":word, "userId": userId}
+                    }).then((response)=>{
+                      return response.data;
+                    })
                   }
                 }
               }
