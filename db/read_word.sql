@@ -1,3 +1,3 @@
 select * from savedwords
-where word like $1
+where word ~* $1
 and externalid = $2;

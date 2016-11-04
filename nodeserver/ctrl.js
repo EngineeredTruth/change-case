@@ -7,6 +7,7 @@ module.exports = {
     },
     addWord: (req, res, next) => {
 
+
       db.read_word([req.body.word, req.body.userId], function(err, res1){
         if(err){
           console.log('read_word error: ', err)
