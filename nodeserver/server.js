@@ -38,7 +38,7 @@ var strategy = new Auth0Strategy({
         domain: 'tran.auth0.com',
         clientID: config.auth0ClientId,
         clientSecret: config.auth0Secret,
-        callbackURL: 'http://localhost:3000/callback'
+        callbackURL: 'http://localhost:4000/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
         console.log("accessToken: ", accessToken);
