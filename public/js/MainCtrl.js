@@ -20,6 +20,9 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
 
   $scope.lowerCase = function(){
     $scope.string = $scope.string.toLowerCase();
+    if($scope.list){
+      console.log($scope.list)
+    }
   };
 
   $scope.upperCase = function(){
