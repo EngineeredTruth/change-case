@@ -18,15 +18,30 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
     }
   }
 
+  const convertSavedWords = (list) => {
+    for(let i = 0; i < list.length; i++){
+      let searchTerm = new RegExp('\(\\b|\\s)'+list[i].word+'\(\\b|\\s)','gi')
+      console.log('Search Term: ', searchTerm)
+      $scope.string = $scope.string.replace(searchTerm, '$1'+list[i].word+'$2')
+    }
+  }
+
   $scope.lowerCase = function(){
     $scope.string = $scope.string.toLowerCase();
     if($scope.list){
-      console.log($scope.list)
+        convertSavedWords($scope.list)
     }
   };
 
   $scope.upperCase = function(){
     $scope.string = $scope.string.toUpperCase();
+    if($scope.list){
+          console.log($scope.list)
+      for(let i = 0; i < $scope.list.length; i++){
+        let searchTerm = new RegExp($scope.list[i].word,'gi')
+        $scope.string = $scope.string.replace(searchTerm, $scope.list[i].word)
+      }
+    }
   };
 
   $scope.capitalCase = function(){
@@ -47,6 +62,11 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
     }
 
     $scope.string = results.join('');
+
+    if($scope.list){
+        convertSavedWords($scope.list)
+    }
+
   };
 
   $scope.camelCase = function(){
@@ -65,6 +85,11 @@ angular.module('app').controller('MainCtrl', function($scope, srvc, promiseObj, 
     }
 
     $scope.string = results.join('');
+
+    if($scope.list){
+        convertSavedWords($scope.list)
+    }
+
   };
 
   $scope.undoBtn = 'Remove Spaces'

@@ -9,9 +9,8 @@ import path from 'path';
 
 var Auth0Strategy = require('passport-auth0')
 
-const connectionString = 'postgres://Tran@localhost/changecase';
 const massiveInstance = massive.connectSync({
-    connectionString: connectionString
+    connectionString: config.connectionString
 });
 
 const app = module.exports = express();
