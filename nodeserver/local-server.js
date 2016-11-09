@@ -38,9 +38,13 @@ var strategy = new Auth0Strategy({
         domain: 'tran.auth0.com',
         clientID: config.auth0ClientId,
         clientSecret: config.auth0Secret,
-        callbackURL: 'http://changecase.co/callback'
+        callbackURL: 'http://localhost:4000/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
+        console.log("accessToken: ", accessToken);
+        console.log('refreshToken: ', refreshToken);
+        console.log('extraParams: ', extraParams);
+        console.log('profile: ', profile.id)
 
         db.read_user_externalId([profile.id], (err, response) => {
             if (err) {
