@@ -41,7 +41,7 @@ var strategy = new Auth0Strategy({
         callbackURL: 'http://changecase.co/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-
+      console.log("What's DB: ", db)
         db.read_user_externalId([profile.id], (err, response) => {
             if (err) {
                 console.log('ERROR at READ EXTERNALID: ', profile.id)
@@ -112,4 +112,3 @@ passport.deserializeUser((obj, done) => {
 app.listen(config.port, () => {
     console.log('Hosting port', config.port);
 });
-
