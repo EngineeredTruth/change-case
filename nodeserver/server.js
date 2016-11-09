@@ -112,3 +112,4 @@ passport.deserializeUser((obj, done) => {
 app.listen(config.port, () => {
     console.log('Hosting port', config.port);
 });
+
