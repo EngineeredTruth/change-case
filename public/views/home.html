@@ -10,6 +10,10 @@
         <h2 class='text-center' ng-if="user">Welcome Back {{user.displayName}}</h2>
     </div>
 
+    <div class='text-center description'>
+      <p>Easily change the case of any text. If you have special words that need to be capitalized a certain way (e.g. Game of Thrones, The Walking Dead) then login to save words</p>
+    </div>
+
     <div style='margin-bottom: 20px;' class='text-center' class='btn-group form-group' role='group' aria-label='...'>
         <form ng-submit=log()>
             <input ng-keydown='clearInput()' ng-click='clearInput()' autofocus class='string' ng-model=string />

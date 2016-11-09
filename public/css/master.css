@@ -43,3 +43,9 @@
   cursor: pointer;
   color: #FF7777;
 }
+
+.description {
+  width: 550px;
+  margin: auto;
+  font-size: 17px;
+}
