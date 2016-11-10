@@ -41,11 +41,7 @@ var strategy = new Auth0Strategy({
         callbackURL: 'http://localhost:4000/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-        console.log("accessToken: ", accessToken);
-        console.log('refreshToken: ', refreshToken);
-        console.log('extraParams: ', extraParams);
-        console.log('profile: ', profile.id)
-
+      console.log('Whats DB: ', db)
         db.read_user_externalId([profile.id], (err, response) => {
             if (err) {
                 console.log('ERROR at READ EXTERNALID: ', profile.id)
@@ -66,11 +62,6 @@ var strategy = new Auth0Strategy({
 );
 
 passport.use(strategy);
-
-app.get('/', function(req, res) {
-
-    res.status(200).json(messages);
-});
 
 app.get('/auth/', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
@@ -93,13 +84,6 @@ app.get('/getUserData', (req, res, next) => {
       return res.json({"No":"user"});
     }
 })
-
-
-app.get('/login', (req, res, next) => {
-    res.json({
-        "test": "is working"
-    });
-});
 
 app.post('/addWord', ctrl.addWord)
 app.post('/removeWord', ctrl.removeWord)

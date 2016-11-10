@@ -27,9 +27,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.set('db', massiveInstance);
 app.use(express.static(__dirname + '/../public'));
-// app.get('*', function(request, response) {
-//     response.sendFile(path.resolve(__dirname, '../public', 'index.html'))
-// });
+
 const db = app.get('db');
 const ctrl = require('./ctrl.js');
 
@@ -63,11 +61,6 @@ var strategy = new Auth0Strategy({
 
 passport.use(strategy);
 
-app.get('/', function(req, res) {
-
-    res.status(200).json(messages);
-});
-
 app.get('/auth/', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
     failureRedirect: '/auth',
@@ -89,13 +82,6 @@ app.get('/getUserData', (req, res, next) => {
       return res.json({"No":"user"});
     }
 })
-
-
-app.get('/login', (req, res, next) => {
-    res.json({
-        "test": "is working"
-    });
-});
 
 app.post('/addWord', ctrl.addWord)
 app.post('/removeWord', ctrl.removeWord)
