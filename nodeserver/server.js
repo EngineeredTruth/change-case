@@ -36,7 +36,7 @@ var strategy = new Auth0Strategy({
         domain: 'tran.auth0.com',
         clientID: config.auth0ClientId,
         clientSecret: config.auth0Secret,
-        callbackURL: 'http://http://138.68.17.180:8000/callback'
+        callbackURL: 'http://138.68.17.180:8000/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
       console.log("What's DB: ", db)
