@@ -28,6 +28,7 @@
     "massive": "^2.4.0",
     "passport": "^0.3.2",
     "path": "^0.12.7",
+    "prerender-node": "^2.7.0",
     "request": "^2.74.0"
   },
   "babel": {

@@ -15,6 +15,8 @@ const massiveInstance = massive.connectSync({
 
 const app = module.exports = express();
 
+app.use(require('prerender-node'));
+
 app.use(session({
     secret: config.sessionSecret,
     saveUninitialized: false,
